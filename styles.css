@@ -1,0 +1,70 @@
+:root{
+  --accent: rgba(255,255,255,0.95);
+  --overlay: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+  font-size:16px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;scroll-behavior:smooth}
+body{scroll-snap-type:y mandatory;background:#111;color:#fff}
+
+/* header */
+.site-header{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;backdrop-filter:blur(6px)}
+.site-header h1{font-size:1rem;margin:0}
+.top-nav a{color:var(--accent);text-decoration:none;margin-left:12px;font-weight:600}
+
+/* full-screen stops */
+main{margin:0;padding:0}
+.stop{
+  height:100vh;
+  scroll-snap-align:center;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background-position 0.2s linear;
+}
+
+/* dark overlay and centered card */
+.stop::before{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--overlay);
+}
+.card{
+  position:relative;z-index:2;
+  max-width:740px;padding:28px;border-radius:12px;
+  text-align:center;background:rgba(0,0,0,0.35);
+  transform:translateY(18px);opacity:0;transition:transform .8s cubic-bezier(.2,.9,.3,1),opacity .8s;
+  backdrop-filter:blur(4px)
+}
+.stop.in-view .card{transform:none;opacity:1}
+.card h2{margin:0 0 8px;font-size:clamp(20px,4vw,32px)}
+.card p{margin:0;font-size:clamp(14px,2.2vw,18px)}
+
+.site-footer{position:fixed;left:0;right:0;bottom:6px;text-align:center;font-size:13px;opacity:.9}
+
+/* small screens tweaks */
+@media (max-width:640px){
+  .card{padding:18px;border-radius:10px}
+  .top-nav a{display:none}
+}
+
+.gallery {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.gallery img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.1);
+}
